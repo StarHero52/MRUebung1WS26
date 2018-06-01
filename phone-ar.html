@@ -82,7 +82,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       function initXR() {
         xrButton = new XRDeviceButton({
           onRequestSession: onRequestSession,
-          onEndSession: onEndSession
+          onEndSession: onEndSession,
+          textEnterXRTitle: "START AR",
+          textXRNotFoundTitle: "AR NOT FOUND",
+          textExitXRTitle: "EXIT  AR",
         });
         document.querySelector('header').appendChild(xrButton.domElement);
 
@@ -100,6 +103,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         // AR sessions must have an outputContext, just like magic window
         // sessions.
         let outputCanvas = document.createElement('canvas');
+        outputCanvas.setAttribute('id', 'output-canvas');
         let ctx = outputCanvas.getContext('xrpresent');
 
         // Even though this is a non-exclusive session, the fact that it's
@@ -140,6 +144,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
       function onEndSession(session) {
         session.end();
+        // Remove the injected output canvas from the DOM.
+        document.body.removeChild(document.querySelector('#output-canvas'));
       }
 
       function onSessionEnded(event) {
