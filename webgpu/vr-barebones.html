@@ -38,16 +38,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         <p>
           This sample demonstrates extremely simple use of an "immersive-vr"
           session with the WebGPU API and no library dependencies. It doesn't
-          render anything exciting, just clears your headset's display to a
-          slowly changing color to prove it's working.
+          render anything exciting, just a rainbow triangle to prove it's working.
           <a class="back" href="./">Back</a>
         </p>
         <button id="xr-button" class="barebones-button" disabled>WebXR or WebGPU not supported</button>
       </details>
     </header>
-    <main style='text-align: center;'>
-      <p>Click 'Enter VR' to see content</p>
-    </main>
     <canvas id='webgpu_canvas'></canvas>
     <script type='module'>
       // Because we are not using the 'secondary-views' feature we can be sure
@@ -335,8 +331,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                   // Clear the color texture to a solid color.
                   loadOp: 'clear',
                   storeOp: 'store',
-                  // Update the clear color each frame so that we can observe
-                  // the color in the headset changing over time.
+                  // Clear to a non-black color so we can see if it's working
+                  // even when the triangle isn't in view.
                   clearValue: [0.1, 0.0, 0.4, 1.0],
                 }]
               });
